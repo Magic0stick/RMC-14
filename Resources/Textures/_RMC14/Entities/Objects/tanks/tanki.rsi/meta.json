@@ -3,19 +3,27 @@
     "license" : "CC-BY-SA-3.0",
     "version": 1,
     "size": {
-      "x": 48,
-      "y": 48
+      "x": 128,
+      "y": 128
     },
     "states": [
       {
-        "name": "MSRunnerMkI-large",
+        "name": "tank-1-frame",
         "directions": 4
       },
       {
-       "name": "MSRunnerMkI-open-large"
+        "name": "tank-2-frame",
+        "directions": 4
       },
       {
-        "name": "MSRunnerMkI-broken-large"
+        "name": "tank-3-frame",
+        "directions": 4
+      },
+      {
+       "name": "tower"
+      },
+      {
+        "name": "tower-destroyed"
       }
     ]
   }
