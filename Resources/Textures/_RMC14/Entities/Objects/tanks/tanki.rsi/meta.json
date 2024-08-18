@@ -8,22 +8,38 @@
     },
     "states": [
       {
-        "name": "tank-1-frame",
-        "directions": 4
+        "name": "tank",
+        "directions": 8,
+        "delays": [
+            [
+              0.1,
+              0.05,
+              0.05
+            ],
+            [
+              0.1,
+              0.05,
+              0.05
+            ],
+            [
+              0.1,
+              0.05,
+              0.05
+            ],
+            [
+              0.1,
+              0.05,
+              0.05
+            ]
+          ]
       },
       {
-        "name": "tank-2-frame",
-        "directions": 4
+       "name": "tower",
+       "directions": 8
       },
       {
-        "name": "tank-3-frame",
-        "directions": 4
-      },
-      {
-       "name": "tower"
-      },
-      {
-        "name": "tower-destroyed"
+        "name": "tower-destroyed",
+        "directions": 8
       }
     ]
   }
