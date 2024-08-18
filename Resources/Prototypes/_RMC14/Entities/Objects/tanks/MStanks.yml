@@ -1,0 +1,140 @@
+- type: entity
+  id: MSBaseTank
+  save: false
+  abstract: true
+  components:
+  - type: MobMover
+  - type: Mech
+  - type: DoAfter
+  - type: Repairable
+    fuelCost: 75
+    doAfterDelay: 30
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: MechBoundUserInterface
+  - type: Puller
+    needsHands: false
+  - type: InputMover
+  - type: InteractionOutline
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Physics
+    bodyType: KinematicController
+  - type: Clickable
+  - type: WiresPanel
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.6
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Strap
+    enabled: false
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      mech-pilot-slot: !type:ContainerSlot
+      mech-equipment-container: !type:Container
+      mech-battery-slot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+
+- type: entity
+  id: MSTank
+  parent: MSBaseTank
+  name: Танк
+  description: Бочка
+  components:
+  - type: Physics
+    bodyType: Dynamic
+    Mass: 50000
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.4,-2,1.4,2"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - LowImpassable
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Entities/Objects/tanks/tanki.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: tank
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Mech
+    exitdelay: 15
+    baseState: tank
+    brokenState: tank-destroyed
+    mechToPilotDamageMultiplier: 0
+    pilotWhitelist:
+      components:
+        - MechWhitelist
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: PointLight
+    enabled: false
+    radius: 9
+    Energy: 5
+  - type: UnpoweredFlashlight
+  - type: NoRotateOnInteract
+
+- type: entity
+  id: MSTankTower
+  parent: MSBaseTank
+  name: Феленид
+  description: Жирный спец-феленид
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.6
+        density: 15
+        mask:
+        - GhostImpassable
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: _RMC14/Entities/Objects/tanks/tanki.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: tower
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Mech
+    exitdelay: 15
+    baseState: tower
+    brokenState: tower-destroyed
+    mechToPilotDamageMultiplier: 0
+    pilotWhitelist:
+      components:
+        - MechWhitelist
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
