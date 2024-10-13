@@ -10,8 +10,14 @@ public sealed partial class ContentTileDefinition
     public bool WeedsSpreadable = true;
 
     [DataField]
+    public bool SemiWeedable = false;
+
+    [DataField]
     public bool BlockConstruction;
 
     [DataField]
     public bool BlockAnchoring;
+
+    [DataField]
+    public Color MinimapColor;
 }

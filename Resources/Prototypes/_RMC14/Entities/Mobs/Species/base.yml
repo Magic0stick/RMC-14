@@ -16,8 +16,18 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
-        - MobLayer
+        - Opaque
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        layer:
+        - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -113,6 +123,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -152,6 +164,8 @@
         Asphyxiation: -0.33
   - type: NoSlip
   - type: NoClothingSlowdown
+  - type: RMCSize
+    size: Humanoid
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits
@@ -183,6 +197,7 @@
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
+  - type: MindCheck
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:
@@ -204,3 +219,15 @@
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
+  - type: TacticalMapTracked
+    trackDead: true
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapMarine
+    marines: true
+  - type: EmoteCooldown
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool

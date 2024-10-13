@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -40,7 +41,7 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -191,7 +192,7 @@ public abstract class SharedMortarSystem : EntitySystem
                 ("shell", shellId));
             _popup.PopupPredicted(selfMsg, othersMsg, mortar, user);
 
-            _audio.PlayPredicted(mortar.Comp.FireSound, mortar, user);
+            _audio.PlayPredicted(mortar.Comp.ReloadSound, mortar, user);
         }
     }
 
@@ -401,8 +402,7 @@ public abstract class SharedMortarSystem : EntitySystem
         if (!HasSkillPopup(mortar, user, true))
             return false;
 
-        if (_area.TryGetArea(mortar, out _, out var area) &&
-            !area.MortarPlacement)
+        if (!_area.CanMortarPlacement(user.ToCoordinates()))
         {
             _popup.PopupClient(Loc.GetString("rmc-mortar-covered", ("mortar", mortar)), user, user, PopupType.SmallCaution);
             return false;

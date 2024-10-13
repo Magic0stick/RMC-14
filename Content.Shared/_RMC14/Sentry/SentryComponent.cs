@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -36,9 +37,6 @@ public sealed partial class SentryComponent : Component
     public int SkillLevel = 2;
 
     [DataField, AutoNetworkedField]
-    public float[] SkillMagazineDelayMultipliers = [1f, 0.75f, 0.5f, 0.375f, 0.25f];
-
-    [DataField, AutoNetworkedField]
     public SoundSpecifier? MagazineSwapSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/unload.ogg");
 
     [DataField, AutoNetworkedField]
@@ -54,7 +52,10 @@ public sealed partial class SentryComponent : Component
     public string ContainerSlotId = "gun_magazine";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId[]? Upgrades = ["RMCSentrySniper", "RMCSentryMini", "RMCSentryOmni"];
+    public EntProtoId[]? Upgrades = ["RMCSentrySniper", "RMCSentryShotgun", "RMCSentryMini", "RMCSentryOmni"];
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TagPrototype>? MagazineTag = "RMCMagazineSentry";
 }
 
 [Serializable, NetSerializable]
